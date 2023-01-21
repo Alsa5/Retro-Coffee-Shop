@@ -15,13 +15,25 @@ This application allows the user to make use of the various features provided fo
 **$)** Generates a Daily Sales Report.
 
 **$)** Helps in Data Setup Configuration - Customer, Items, Cost, GST% .
+\
+\
+\
+**ABOUT PROJECT**
+______________________________________________________________________________________________________________________________________________________________________
 
+This project has been developed in the Java IntelliJ IDE with a JDBC driver connection to the database.\
+This consists of four classes,\
+\
+**$)** OrderNbill class\
+\
+**$)** Main class (JDBC driver connection takes place in the main class).\
+\
 \
 \
 **DATABASE**
 ______________________________________________________________________________________________________________________________________________________________________
 
-This project makes use of a ***MySQL*** database for storage of customer and product details.The database that we've created for this project contains the following tables:
+This project makes use of a ***MySQL*** database for storage of customer and product details.MySQL which is a relational database management system is connected with the IntelliJ using JDBC connectivity.The database that we've created for this project contains the following tables:
 
 **$)** cust table(Cid,LName,FName,Addr,City,Cpoints)
 
