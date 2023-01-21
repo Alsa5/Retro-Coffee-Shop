@@ -14,3 +14,14 @@ $) Generates Customer Points based on Customer visit to the shop.
 $) Generates a Daily Sales Report.
 
 $) Helps in Data Setup Configuration - Customer, Items, Cost, GST% .
+
+DATABASE
+
+This project makes use of a MySQL database for storage of customer and product details.The database that we've created for this project contains the following tables:
+$)cust* table(Cid,LName,FName,Addr,City,Cpoints)
+$)ord** table(oid,bname,bcost,qty,tcost,fcag)
+$)menu table(bname,bcat,bcost)
+
+
+*customer
+**order
