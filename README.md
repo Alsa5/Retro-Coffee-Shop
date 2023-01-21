@@ -26,7 +26,7 @@ This consists of four classes,\
 \
 **$)** OrderNbill class\
 \
-**$)** Main class (JDBC driver connection takes place in the main class).\
+**$)** Main class (JDBC driver connection takes place in the main class).
 \
 \
 \
