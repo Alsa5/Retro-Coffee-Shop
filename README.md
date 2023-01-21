@@ -1,4 +1,3 @@
-`#0d1117`
 **RETRO COFFEE SHOP _Management System_**
 ______________________________________________________________________________________________________________________________________________________________________
 
@@ -16,6 +15,7 @@ This application allows the user to make use of the various features provided fo
 **$)** Generates a Daily Sales Report.
 
 **$)** Helps in Data Setup Configuration - Customer, Items, Cost, GST% .
+
 
 
 **DATABASE**
