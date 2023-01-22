@@ -1,21 +1,28 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Calendar;
-class Product
+import java.util.*;
+import java.lang.Math;
+import java.util.Random;
+
+class item
 {
     // properties
-    private String id;
+    private int cid;
+    private double id;
     private String pname;
     private int qty;
     private double price;
     private double totalPrice;
 
+
     // constructor
-    Product(String id, String pname, int qty, double price, double totalPrice)
+
+    item(int cid,double id, String pname, int qty, double price, double totalPrice)
     {
+        this.cid=cid;
         this.id=id;
         this.pname = pname;
         this.qty = qty;
@@ -23,7 +30,12 @@ class Product
         this.totalPrice = totalPrice;
     }
     // getter methods
-    public String getId()
+    public int getCid()
+    {
+
+        return cid;
+    }
+    public double getId()
     {
         return id;
     }
@@ -47,97 +59,112 @@ class Product
     public static void displayFormat()
     {
         System.out.format("-----------------------------------------------------------------------------------------------------------------------------------");
-        System.out.print("\nOrder ID                 \t\tBname\t\tQuantity\t\tRate \t\t\t\tTotal Price\n");
+        System.out.print("\nOrder ID                    Cid                Bname                  Quantity           Rate                 Total Price\n");
         System.out.format("-----------------------------------------------------------------------------------------------------------------------------------\n");
     }
 
     // display
     public void display()
     {
-        System.out.format("   %-9s             %-9s      %5d             %9.2f                   %14.2f\n" ,id, pname, qty, price, totalPrice);
+        System.out.format("%-9s        %5d               %-9s            %5d            %9.2f           %14.2f\n" ,id,cid, pname, qty, price, totalPrice);
     }
 }
-public class ShoppingBill
-{
-    public static void main(String args[])
-    {
+public class OrderNbill {
+    public static void main(String[] args) {
         // variables
-        String id = null;
+        Random rand = new Random();
+        int cid = rand.nextInt(1000);
+        double id = Math.random();
         String productName = null;
         int quantity = 0;
         double price = 0.0;
         double totalPrice = 0.0;
         double overAllPrice = 0.0;
-        double cgst, sgst, subtotal=0.0, discount=0.0;
+        double cgst, sgst, subtotal = 0.0, discount = 0.0;
         char choice = '\0';
-        System.out.println("\t\t\t\t--------------------Invoice-----------------");
-        System.out.println("\t\t\t\t\t "+"  "+"Retro Coffee Shop");
+        System.out.println("------------------Welcome to RCS--------------------");
+        System.out.println("                Retro Coffee Shop");
         //format of date and time
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         Calendar calendar = Calendar.getInstance();
-        String[] days = new String[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+        String[] days = new String[]{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
         //prints current date and time
-        System.out.println("Date: "+formatter.format(date)+"  "+days[calendar.get(Calendar.DAY_OF_WEEK) - 1]);
+        System.out.println("Date: " + formatter.format(date) + "                    " + days[calendar.get(Calendar.DAY_OF_WEEK) - 1]);
         Scanner scan = new Scanner(System.in);
         System.out.print("Enter Customer Name: ");
-        String customername=scan.nextLine();
+        String customername = scan.nextLine();
         //create Scanner class object
         //creating an ArrayList to store the product
-        List<Product> product = new ArrayList<Product>();
-        do
-        {
-            // read input values
-            System.out.println("Enter the product details: ");
-            System.out.print("Order ID: ");
-            id = scan.nextLine();
-            System.out.print("Your Order: ");
-            productName = scan.nextLine();
-            System.out.print("Quantity: ");
-            quantity = scan.nextInt();
-            System.out.print("Price : ");
-            price = scan.nextDouble();
-            //calculate total price for a particular product
-            totalPrice = price * quantity;
-            //calculates overall price
-            overAllPrice = overAllPrice + totalPrice;
-            //creates Product class object and add it to the List
-            product.add( new Product(id, productName, quantity, price, totalPrice) );
-            // ask for continue shopping?
-            System.out.print("Want to add more items? (y or n): ");
-            //reads a character Y or N
-            choice = scan.next().charAt(0);
-            //read remaining characters, don't store (no use)
-            scan.nextLine();
+        List<item> product = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/rcs", "root", "root");
+            Statement statement = connection.createStatement();
+            ResultSet rs1 = statement.executeQuery("select * from menu");
+            System.out.println("-----------$À la carte$----------\n");
+            while (rs1.next()) {
+                System.out.println(rs1.getString(1) + " " + rs1.getString(2) + " " + rs1.getInt(3));
+            }
+            System.out.println("----------------------------------");
+            //ResultSet rs2 = statement.executeQuery("select Cid from cust where Lname =" + "'" + customername + "'");
+            connection.close();
+            do {
+
+                // read input values
+                System.out.println("Enter the order details: ");
+                System.out.print("Order ID: " + id);
+                System.out.println("  Customer ID: " + );
+                System.out.print("\nYour Order: ");
+                productName = scan.nextLine();
+                System.out.print("Quantity: ");
+                quantity = scan.nextInt();
+                System.out.print("Price : ");
+                price = scan.nextDouble();
+                //calculate total price for a particular product
+                totalPrice = price * quantity;
+                //calculates overall price
+                overAllPrice = overAllPrice + totalPrice;
+                //creates Product class object and add it to the List
+                product.add(new item(cid, id, productName, quantity, price, totalPrice));
+                // ask for continue shopping?
+                System.out.print("Want to add more items? (y or n): ");
+                //reads a character Y or N
+                choice = scan.next().charAt(0);
+                //read remaining characters, don't store (no use)
+                scan.nextLine();
+            }
+            while (choice == 'y' || choice == 'Y');
+            //display all product with its properties
+            item.displayFormat();
+            for (item p : product) {
+                p.display();
+            }
+            //price calculation
+            System.out.println("\n                        Total Amount (Rs.) " + overAllPrice);
+            //calculating discount
+            discount = overAllPrice * 2 / 100;
+            System.out.println("\n                        Discount (Rs.) " + discount);
+            //total amount after discount
+            subtotal = overAllPrice - discount;
+            System.out.println("\n                        Subtotal " + subtotal);
+            //calculating tax
+            sgst = overAllPrice * 12 / 100;
+            System.out.println("\n                        SGST (%) " + sgst);
+            cgst = overAllPrice * 12 / 100;
+            System.out.println("\n                        CGST (%) " + cgst);
+            //calculating amount to be paid by buyer
+            System.out.println("\n                        Invoice Total " + (subtotal + cgst + sgst));
+            Double C = overAllPrice / 100;
+            int p = C.intValue();
+            System.out.println("Points Granted : " + (p * 10));
+            System.out.println("---------------------Thank You for Indulging in our RetroSPL Ordering System!!--------------------");
+            System.out.println("                                         Visit Again");
+            // close Scanner
+            scan.close();
+        } 
+        catch (Exception e) {
+            System.out.println(e);
         }
-        while (choice == 'y' || choice == 'Y');
-        //display all product with its properties
-        Product.displayFormat();
-        for (Product p : product)
-        {
-            p.display();
-        }
-        //price calculation
-        System.out.println("\n\t\t\t\t\t\t\t\t\t\tTotal Amount (Rs.) " +overAllPrice);
-        //calculating discount
-        discount = overAllPrice*2/100;
-        System.out.println("\n\t\t\t\t\t\t\t\t\t\t    Discount (Rs.) " +discount);
-        //total amount after discount
-        subtotal = overAllPrice-discount;
-        System.out.println("\n\t\t\t\t\t\t\t\t\t\t          Subtotal "+subtotal);
-        //calculating tax
-        sgst=overAllPrice*12/100;
-        System.out.println("\n\t\t\t\t\t\t\t\t\t\t          SGST (%) "+sgst);
-        cgst=overAllPrice*12/100;
-        System.out.println("\n\t\t\t\t\t\t\t\t\t\t          CGST (%) "+cgst);
-        //calculating amount to be paid by buyer
-        System.out.println("\n\t\t\t\t\t\t\t\t\t\t     Invoice Total " +(subtotal+cgst+sgst));
-        Double C= overAllPrice/100;
-        int p= C.intValue();
-        System.out.println("Points "+(p*10));
-        System.out.println("\t\t\t\t----------------Thank You for Indulging in our RetroSPL ordering!!-----------------");
-        System.out.println("\t\t\t\t                                Visit Again");
-        // close Scanner
-        scan.close();
     }
 }
