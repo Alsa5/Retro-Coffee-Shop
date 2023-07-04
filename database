@@ -1,0 +1,87 @@
+create database rcs;
+use rcs;
+
+CREATE TABLE cust (
+  FName varchar(255),
+  lname varchar(100),
+  username varchar(100),
+  phno varchar(10),
+  addr varchar(150),
+  pwd varchar(100),
+  confpwd varchar(100)
+);
+
+mysql> desc cust;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| FName    | varchar(255) | YES  |     | NULL    |       |
+| lname    | varchar(100) | YES  |     | NULL    |       |
+| username | varchar(100) | YES  |     | NULL    |       |
+| phno     | varchar(10)  | YES  |     | NULL    |       |
+| addr     | varchar(150) | YES  |     | NULL    |       |
+| pwd      | varchar(100) | YES  |     | NULL    |       |
+| confpwd  | varchar(100) | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+
+    
+CREATE TABLE menu (
+  bname varchar(101),
+  bcat varchar(101),
+  bcost int,
+  qty int
+);
+
+mysql> desc menu;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| bname | varchar(101) | YES  |     | NULL    |       |
+| bcat  | varchar(101) | YES  |     | NULL    |       |
+| bcost | int          | YES  |     | NULL    |       |
+| qty   | int          | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+CREATE TABLE ord (
+  oid int,
+  bname varchar(101),
+  bcost int,
+  qty int,
+  tcost int,
+  fcag int
+);
+    
+mysql> desc ord;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| oid   | int          | YES  |     | NULL    |       |
+| bname | varchar(101) | YES  |     | NULL    |       |
+| bcost | int          | YES  |     | NULL    |       |
+| qty   | int          | YES  |     | NULL    |       |
+| tcost | int          | YES  |     | NULL    |       |
+| fcag  | int          | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+6 rows in set (0.03 sec)
+
+
+CREATE TABLE sales (
+  tdate date,
+  bname varchar(101),
+  custc int,
+  sid int
+);
+    
+mysql> desc sales;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| tdate | date         | YES  |     | NULL    |       |
+| bname | varchar(101) | YES  |     | NULL    |       |
+| custc | int          | YES  |     | NULL    |       |
+| sid   | int          | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
