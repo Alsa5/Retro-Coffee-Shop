@@ -111,7 +111,7 @@ sel = list()
 def newlogin():
     root.destroy()
     n=Tk()
-    n.title("Auwana login Page")
+    n.title("JavaJive login Page")
     n.config(bg='navajowhite')
     n.geometry("1600x1600")
 
@@ -142,35 +142,18 @@ def newlogin():
             
         for i in result:
             if i[0]==u1 and i[1]==p1:
-                mes = messagebox.showinfo("","login was successful")
+                mes = messagebox.showinfo("SUCCESSFUL","login was successful")
                 r="yes"
                 
                 a = Toplevel()
-                a.title("Auwana Home Page")
+                a.title("JavaJive Home Page")
                 a.config(bg='navajowhite')
                 a.geometry("1600x1600")
 
-                l=Label(a, text = "Auwana", fg ="brown4", bg = "navajowhite", font=("Helvetica","48","bold")).pack()
+                l=Label(a, text = "JavaJive", fg ="brown4", bg = "navajowhite", font=("Helvetica","48","bold")).pack()
                 im=Image.open("D:\\Data\\Downloads\\search.jpeg")
                 im = im.resize((50,50), Image.Resampling.LANCZOS)
-                ph=ImageTk.PhotoImage(im)            
-
-
-                """
-                imag=Image.open("D:\\Data\\Downloads\\helpline123.jpeg")#frame
-                imag=imag.resize((200,250),Image.Resampling.LANCZOS)
-                imag=ImageTk.PhotoImage(imag)
-                fr=Frame(a)
-                ca=Canvas(fr,width=1250,height=610)
-                ca.pack(anchor=S)
-                fr.pack(anchor=S)
-                ca.create_image(100,250,image=imag)
-
-                pict=Image.open("D:\\Data\\Downloads\\WhatsApp Image 2022-10-22 at 7.37.18 AM.jpeg")#frame2
-                pict=pict.resize((150,150),Image.Resampling.LANCZOS)
-                pict=ImageTk.PhotoImage(pict)
-                ca.create_image(1150,250,image=pict)
-                """
+                ph=ImageTk.PhotoImage(im)           
                 
                 video = imageio.get_reader("D:\\Data\\Downloads\\_hitpaw.com (online-video-cutter.com).mp4")#video
                 delay = int(1000 / video.get_meta_data()['fps'])
