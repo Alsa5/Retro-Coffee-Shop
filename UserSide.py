@@ -596,4 +596,4 @@ ca.create_image(620,200,image=imag)
 root.iconbitmap("D:\\Data\\Downloads\\logo_transparent.ico")
 root.mainloop()
 
-print("Customer Points Credited to your Account:",int(customerprice/10),"!")
+print("Customer Points Credited to your Account:",int(customerprice//100*10),"!")
