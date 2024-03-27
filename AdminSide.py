@@ -24,7 +24,7 @@ while p=="admin":
         
         if b=="update":
             print("what col do u wanna update")
-            ch=input("enter col name")
+            ch=input("enter column name")
             
             if ch=="bname":
         
